@@ -6,7 +6,6 @@ export default function Post({nome, imagemPerfil, imagemPost, descricao, imagemP
   const [classNome, setClassCurtido] = React.useState("heart-outline")
   const [likes, setLikes] = React.useState(quantidadeDeCurtidas)
 
-
   function curtir() {
     setCurtido(!curtido)
     
@@ -16,6 +15,27 @@ export default function Post({nome, imagemPerfil, imagemPost, descricao, imagemP
     } else {
       setClassCurtido('heart-outline')
       setLikes(likes - 1)
+    }
+  }
+
+  function curtir2() {
+    setCurtido(true)
+    if(curtido === false) {
+      setClassCurtido('heart')
+      setLikes(likes + 1)
+    }
+  }
+
+  const [salvo, setSalvo] = React.useState(false)
+  const [classSalvo, setClassSalvo] = React.useState("bookmark-outline")
+
+  function salvar() {
+    setSalvo(!salvo)
+
+    if(salvo === false) {
+      setClassSalvo("bookmark")
+    } else {
+      setClassSalvo("bookmark-outline")
     }
   }
 
@@ -32,7 +52,7 @@ export default function Post({nome, imagemPerfil, imagemPost, descricao, imagemP
       </div>
 
       <div className="conteudo">
-        <img src={imagemPost} alt={descricao}/>
+        <img src={imagemPost} alt={descricao} onClick={() => curtir2()}/>
       </div>
 
       <div className="fundo">
@@ -43,7 +63,7 @@ export default function Post({nome, imagemPerfil, imagemPost, descricao, imagemP
             <ion-icon name="paper-plane-outline"></ion-icon>
           </div>
           <div>
-            <ion-icon name="bookmark-outline"></ion-icon>
+            <ion-icon name={classSalvo} onClick={() => salvar()}></ion-icon>
           </div>
         </div>
 
